@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="en" ng-app="sportStore">
+<head>
+	<meta charset="UTF-8">
+	<title>AngularJS上课所讲内容</title>
+<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
+<script src="lib/jquery.js"></script>
+<script src="lib/bootstrap.js"></script>
+<script src="lib/angular.js"></script>
+</head>
+<body ng-controller="productListCtrl">
+    <div class="navbar navbar-inverse">
+        <a href="#" class="navbar-brand">我的购物网站</a>
+    </div>
+    <div class="panel panel-default row ">
+        <div class="col-md-4">
+            导航
+            <a href="#" ng-click="selectCategory()" 
+            	class="btn btn-block btn-default">Home</a>
+            <a href="#" ng-repeat="item in data.products|unique:'category'"
+            	class="btn btn-block btn-default"
+            	ng-click="selectCategory(item)" ng-class="getCategoryClass(item)">
+                {{item}}
+            </a>
+        </div>
+        <div class="col-md-8">
+            商品的列表
+            <div class="well" ng-repeat="product in data.products| filter:categoryFilterFn ">
+                <h3>
+                    <strong> {{product.name}} </strong>
+                    <span class="pull-right label label-primary">
+                        {{product.price | currency}}</span>
+                </h3>
+                <span class="lead">{{product.description}}</span>
+            </div>
+        </div>
+    </div>
+    <script>
+        angular.module("sportStore",["customFilters"])
+        //     controller("sportStoreCtrl",function ($scope) {
+        //      var selectCategory=null;
+        //     $scope.data = {
+        //         products:[{"name":"tv","description":"television","category":"dianzi","price":10000,"id":"850895adda2968ad"},{"name":"lenovo","description":"computer","category":"notebook","price":3000,"id":"be34444cf5d28949"},{"name":"xiaomi","description":"television","category":"dianzi","price":20000,"id":"45b05ea48e113879"}]
+        //     }
+           
+        //     $scope.selectCategory=function(newSelectCategory){
+        //     	selectCategory=newSelectCategory;
+        //     	console.log(selectCategory);
+        //     }
+           
+        // });
+    </script>
+    <script src="lib/productListActiveController.js"></script>
+    <script src="lib/customFilters.js"></script>
+</body>
+</html>
